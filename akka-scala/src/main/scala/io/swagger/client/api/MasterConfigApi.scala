@@ -12,6 +12,7 @@ import io.swagger.client.model.MasterConfigModel
 import io.swagger.client.model.ParentIdModel
 import io.swagger.client.model.ParentUnitIdModel
 import io.swagger.client.model.ProductLevelsModel
+import io.swagger.client.model.SalesLevelsModel
 import io.swagger.client.model.SalesSegmentsModel
 import io.swagger.client.model.TransportCapacitiesModel
 import io.swagger.client.model.UnitAvalibilitiesModel
@@ -130,6 +131,22 @@ object MasterConfigApi {
     ApiRequest[ProductLevelsModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/productlevels", "application/json")
       .withPathParam("siteRef", siteRef)
       .withSuccessResponse[ProductLevelsModel](200)
+      .withErrorResponse[ApiErrorResponse](401)
+      .withErrorResponse[ApiErrorResponse](500)
+        /**
+   * Returns a list of sales levels
+   * 
+   * Expected answers:
+   *   code 200 : SalesLevelsModel (successful operation)
+   *   code 401 : ApiErrorResponse (Unauthorised)
+   *   code 500 : ApiErrorResponse (Internal server error)
+   * 
+   * @param siteRef Site reference for the required site. The use of @all will return UOM for all sites.
+   */
+  def getSalesLevels(siteRef: String): ApiRequest[SalesLevelsModel] =
+    ApiRequest[SalesLevelsModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/saleslevels", "application/json")
+      .withPathParam("siteRef", siteRef)
+      .withSuccessResponse[SalesLevelsModel](200)
       .withErrorResponse[ApiErrorResponse](401)
       .withErrorResponse[ApiErrorResponse](500)
         /**
