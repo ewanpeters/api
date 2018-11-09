@@ -11,9 +11,12 @@ import io.swagger.client.model.CostDriverModel
 import io.swagger.client.model.MasterConfigModel
 import io.swagger.client.model.ParentIdModel
 import io.swagger.client.model.ParentUnitIdModel
+import io.swagger.client.model.ProductLevelsModel
+import io.swagger.client.model.SalesSegmentsModel
 import io.swagger.client.model.TransportCapacitiesModel
 import io.swagger.client.model.UnitAvalibilitiesModel
 import io.swagger.client.model.UnitHierachyModel
+import io.swagger.client.model.UnitParentIconModel
 import io.swagger.client.model.UnitsOfMeasureModel
 import io.swagger.client.core._
 import io.swagger.client.core.CollectionFormats._
@@ -114,6 +117,38 @@ object MasterConfigApi {
       .withErrorResponse[ApiErrorResponse](401)
       .withErrorResponse[ApiErrorResponse](500)
         /**
+   * Returns a list of product levels
+   * 
+   * Expected answers:
+   *   code 200 : ProductLevelsModel (successful operation)
+   *   code 401 : ApiErrorResponse (Unauthorised)
+   *   code 500 : ApiErrorResponse (Internal server error)
+   * 
+   * @param siteRef Site reference for the required site. The use of @all will return UOM for all sites.
+   */
+  def getProductLevels(siteRef: String): ApiRequest[ProductLevelsModel] =
+    ApiRequest[ProductLevelsModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/productlevels", "application/json")
+      .withPathParam("siteRef", siteRef)
+      .withSuccessResponse[ProductLevelsModel](200)
+      .withErrorResponse[ApiErrorResponse](401)
+      .withErrorResponse[ApiErrorResponse](500)
+        /**
+   * Returns a list of sales segments
+   * 
+   * Expected answers:
+   *   code 200 : SalesSegmentsModel (successful operation)
+   *   code 401 : ApiErrorResponse (Unauthorised)
+   *   code 500 : ApiErrorResponse (Internal server error)
+   * 
+   * @param siteRef Site reference for the required site. The use of @all will return UOM for all sites.
+   */
+  def getSalesSegments(siteRef: String): ApiRequest[SalesSegmentsModel] =
+    ApiRequest[SalesSegmentsModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/salessegments", "application/json")
+      .withPathParam("siteRef", siteRef)
+      .withSuccessResponse[SalesSegmentsModel](200)
+      .withErrorResponse[ApiErrorResponse](401)
+      .withErrorResponse[ApiErrorResponse](500)
+        /**
    * Returns a list of the transport capacities for a site or unit ID
    * 
    * Expected answers:
@@ -147,6 +182,22 @@ object MasterConfigApi {
       .withPathParam("siteRef", siteRef)
       .withPathParam("UnitId", unitId)
       .withSuccessResponse[UnitAvalibilitiesModel](200)
+      .withErrorResponse[ApiErrorResponse](401)
+      .withErrorResponse[ApiErrorResponse](500)
+        /**
+   * Returns a list of unit parent icons
+   * 
+   * Expected answers:
+   *   code 200 : UnitParentIconModel (successful operation)
+   *   code 401 : ApiErrorResponse (Unauthorised)
+   *   code 500 : ApiErrorResponse (Internal server error)
+   * 
+   * @param siteRef Site reference for the required site. The use of @all will return UOM for all sites.
+   */
+  def getUnitParentIcons(siteRef: String): ApiRequest[UnitParentIconModel] =
+    ApiRequest[UnitParentIconModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/unitparenticon", "application/json")
+      .withPathParam("siteRef", siteRef)
+      .withSuccessResponse[UnitParentIconModel](200)
       .withErrorResponse[ApiErrorResponse](401)
       .withErrorResponse[ApiErrorResponse](500)
         /**
