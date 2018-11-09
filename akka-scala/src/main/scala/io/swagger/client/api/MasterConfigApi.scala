@@ -9,6 +9,7 @@ import io.swagger.client.model.AccountNameModel
 import io.swagger.client.model.ApiErrorResponse
 import io.swagger.client.model.CostDriverModel
 import io.swagger.client.model.MasterConfigModel
+import io.swagger.client.model.ParentIdModel
 import io.swagger.client.model.ParentUnitIdModel
 import io.swagger.client.model.TransportCapacitiesModel
 import io.swagger.client.model.UnitAvalibilitiesModel
@@ -76,6 +77,22 @@ object MasterConfigApi {
       .withPathParam("unitID", unitID)
       .withPathParam("destinationStockingPoint", destinationStockingPoint)
       .withSuccessResponse[MasterConfigModel](200)
+      .withErrorResponse[ApiErrorResponse](401)
+      .withErrorResponse[ApiErrorResponse](500)
+        /**
+   * Returns a list of parent Ids
+   * 
+   * Expected answers:
+   *   code 200 : ParentIdModel (successful operation)
+   *   code 401 : ApiErrorResponse (Unauthorised)
+   *   code 500 : ApiErrorResponse (Internal server error)
+   * 
+   * @param siteRef Site reference for the required site. The use of @all will return UOM for all sites.
+   */
+  def getParentId(siteRef: String): ApiRequest[ParentIdModel] =
+    ApiRequest[ParentIdModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/ParentId", "application/json")
+      .withPathParam("siteRef", siteRef)
+      .withSuccessResponse[ParentIdModel](200)
       .withErrorResponse[ApiErrorResponse](401)
       .withErrorResponse[ApiErrorResponse](500)
         /**
