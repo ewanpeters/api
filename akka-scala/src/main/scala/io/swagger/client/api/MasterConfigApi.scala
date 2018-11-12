@@ -8,12 +8,18 @@ package io.swagger.client.api
 import io.swagger.client.model.AccountNameModel
 import io.swagger.client.model.ApiErrorResponse
 import io.swagger.client.model.CostDriverModel
+import io.swagger.client.model.CurrenciesModel
+import io.swagger.client.model.CurrencyRatesModel
 import io.swagger.client.model.MasterConfigModel
 import io.swagger.client.model.ParentIdModel
 import io.swagger.client.model.ParentUnitIdModel
 import io.swagger.client.model.ProductLevelsModel
 import io.swagger.client.model.SalesLevelsModel
 import io.swagger.client.model.SalesSegmentsModel
+import io.swagger.client.model.ShiftDaysModel
+import io.swagger.client.model.ShiftPatternsModel
+import io.swagger.client.model.SiteRDCMappingModel
+import io.swagger.client.model.StockingPointCapacitesModel
 import io.swagger.client.model.TransportCapacitiesModel
 import io.swagger.client.model.UnitAvalibilitiesModel
 import io.swagger.client.model.UnitHierachyModel
@@ -57,6 +63,38 @@ object MasterConfigApi {
     ApiRequest[CostDriverModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/costdriver", "application/json")
       .withPathParam("siteRef", siteRef)
       .withSuccessResponse[CostDriverModel](200)
+      .withErrorResponse[ApiErrorResponse](401)
+      .withErrorResponse[ApiErrorResponse](500)
+        /**
+   * Returns a list of currencies
+   * 
+   * Expected answers:
+   *   code 200 : CurrenciesModel (successful operation)
+   *   code 401 : ApiErrorResponse (Unauthorised)
+   *   code 500 : ApiErrorResponse (Internal server error)
+   * 
+   * @param siteRef Site reference for the required site. The use of @all will return UOM for all sites.
+   */
+  def getCurrencies(siteRef: String): ApiRequest[CurrenciesModel] =
+    ApiRequest[CurrenciesModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/currencies", "application/json")
+      .withPathParam("siteRef", siteRef)
+      .withSuccessResponse[CurrenciesModel](200)
+      .withErrorResponse[ApiErrorResponse](401)
+      .withErrorResponse[ApiErrorResponse](500)
+        /**
+   * Returns a list of currency rates
+   * 
+   * Expected answers:
+   *   code 200 : CurrencyRatesModel (successful operation)
+   *   code 401 : ApiErrorResponse (Unauthorised)
+   *   code 500 : ApiErrorResponse (Internal server error)
+   * 
+   * @param siteRef Site reference for the required site. The use of @all will return UOM for all sites.
+   */
+  def getCurrencyRates(siteRef: String): ApiRequest[CurrencyRatesModel] =
+    ApiRequest[CurrencyRatesModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/currencyrates", "application/json")
+      .withPathParam("siteRef", siteRef)
+      .withSuccessResponse[CurrencyRatesModel](200)
       .withErrorResponse[ApiErrorResponse](401)
       .withErrorResponse[ApiErrorResponse](500)
         /**
@@ -134,6 +172,22 @@ object MasterConfigApi {
       .withErrorResponse[ApiErrorResponse](401)
       .withErrorResponse[ApiErrorResponse](500)
         /**
+   * Returns a list of RDC mapping
+   * 
+   * Expected answers:
+   *   code 200 : SiteRDCMappingModel (successful operation)
+   *   code 401 : ApiErrorResponse (Unauthorised)
+   *   code 500 : ApiErrorResponse (Internal server error)
+   * 
+   * @param siteRef Site reference for the required site. The use of @all will return UOM for all sites.
+   */
+  def getRDCMapping(siteRef: String): ApiRequest[SiteRDCMappingModel] =
+    ApiRequest[SiteRDCMappingModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/siterdcmapping", "application/json")
+      .withPathParam("siteRef", siteRef)
+      .withSuccessResponse[SiteRDCMappingModel](200)
+      .withErrorResponse[ApiErrorResponse](401)
+      .withErrorResponse[ApiErrorResponse](500)
+        /**
    * Returns a list of sales levels
    * 
    * Expected answers:
@@ -163,6 +217,54 @@ object MasterConfigApi {
     ApiRequest[SalesSegmentsModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/salessegments", "application/json")
       .withPathParam("siteRef", siteRef)
       .withSuccessResponse[SalesSegmentsModel](200)
+      .withErrorResponse[ApiErrorResponse](401)
+      .withErrorResponse[ApiErrorResponse](500)
+        /**
+   * Returns a list of shift days
+   * 
+   * Expected answers:
+   *   code 200 : ShiftDaysModel (successful operation)
+   *   code 401 : ApiErrorResponse (Unauthorised)
+   *   code 500 : ApiErrorResponse (Internal server error)
+   * 
+   * @param siteRef Site reference for the required site. The use of @all will return UOM for all sites.
+   */
+  def getShiftDays(siteRef: String): ApiRequest[ShiftDaysModel] =
+    ApiRequest[ShiftDaysModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/shiftdays", "application/json")
+      .withPathParam("siteRef", siteRef)
+      .withSuccessResponse[ShiftDaysModel](200)
+      .withErrorResponse[ApiErrorResponse](401)
+      .withErrorResponse[ApiErrorResponse](500)
+        /**
+   * Returns a list of shift patterns
+   * 
+   * Expected answers:
+   *   code 200 : ShiftPatternsModel (successful operation)
+   *   code 401 : ApiErrorResponse (Unauthorised)
+   *   code 500 : ApiErrorResponse (Internal server error)
+   * 
+   * @param siteRef Site reference for the required site. The use of @all will return UOM for all sites.
+   */
+  def getShiftPatterns(siteRef: String): ApiRequest[ShiftPatternsModel] =
+    ApiRequest[ShiftPatternsModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/shiftpatterns", "application/json")
+      .withPathParam("siteRef", siteRef)
+      .withSuccessResponse[ShiftPatternsModel](200)
+      .withErrorResponse[ApiErrorResponse](401)
+      .withErrorResponse[ApiErrorResponse](500)
+        /**
+   * Returns a list of stocking point capacities
+   * 
+   * Expected answers:
+   *   code 200 : StockingPointCapacitesModel (successful operation)
+   *   code 401 : ApiErrorResponse (Unauthorised)
+   *   code 500 : ApiErrorResponse (Internal server error)
+   * 
+   * @param siteRef Site reference for the required site. The use of @all will return UOM for all sites.
+   */
+  def getStockingPointCapacities(siteRef: String): ApiRequest[StockingPointCapacitesModel] =
+    ApiRequest[StockingPointCapacitesModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/stockingpointcapacities", "application/json")
+      .withPathParam("siteRef", siteRef)
+      .withSuccessResponse[StockingPointCapacitesModel](200)
       .withErrorResponse[ApiErrorResponse](401)
       .withErrorResponse[ApiErrorResponse](500)
         /**
