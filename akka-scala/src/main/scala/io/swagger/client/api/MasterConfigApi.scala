@@ -14,6 +14,7 @@ import io.swagger.client.model.MasterConfigModel
 import io.swagger.client.model.ParentIdModel
 import io.swagger.client.model.ParentUnitIdModel
 import io.swagger.client.model.ProductLevelsModel
+import io.swagger.client.model.RoutingConfiguratorViewModel
 import io.swagger.client.model.SalesLevelsModel
 import io.swagger.client.model.SalesSegmentsModel
 import io.swagger.client.model.ShiftDaysModel
@@ -185,6 +186,22 @@ object MasterConfigApi {
     ApiRequest[SiteRDCMappingModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/siterdcmapping", "application/json")
       .withPathParam("siteRef", siteRef)
       .withSuccessResponse[SiteRDCMappingModel](200)
+      .withErrorResponse[ApiErrorResponse](401)
+      .withErrorResponse[ApiErrorResponse](500)
+        /**
+   * Returns a list of routing configurator views
+   * 
+   * Expected answers:
+   *   code 200 : RoutingConfiguratorViewModel (successful operation)
+   *   code 401 : ApiErrorResponse (Unauthorised)
+   *   code 500 : ApiErrorResponse (Internal server error)
+   * 
+   * @param siteRef Site reference for the required . The use of @all will return routing configurator view for all sites
+   */
+  def getRoutingConfiguratorView(siteRef: String): ApiRequest[RoutingConfiguratorViewModel] =
+    ApiRequest[RoutingConfiguratorViewModel](ApiMethods.GET, "https://virtserver.swaggerhub.com/ewanpeters/production-planning/1.0.0", "/sites/{siteRef}/productionplanning/routingconfiguratorview", "application/json")
+      .withPathParam("siteRef", siteRef)
+      .withSuccessResponse[RoutingConfiguratorViewModel](200)
       .withErrorResponse[ApiErrorResponse](401)
       .withErrorResponse[ApiErrorResponse](500)
         /**
